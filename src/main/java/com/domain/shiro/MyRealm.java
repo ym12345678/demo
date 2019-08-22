@@ -1,16 +1,12 @@
 package com.domain.shiro;
 
-import com.lottery.constant.RedisPrefixConstants;
-import com.lottery.core.shiro.token.JWTToken;
-import com.lottery.enums.LoginTipsEnum;
-import com.lottery.enums.RoleEnum;
-import com.lottery.exception.MyException;
-import com.lottery.modules.authority.SysMenuDao;
-import com.lottery.modules.user.User;
-import com.lottery.modules.user.UserDao;
-import com.lottery.redis.RedisService;
-import com.lottery.service.system.UserOnlineStateService;
-import com.lottery.tools.JwtHelper;
+
+import com.dao.UserDao;
+import com.domain.User;
+import com.domain.exception.MyException;
+import com.domain.redis.RedisService;
+import com.domain.shiro.token.JWTToken;
+import com.domain.utils.JwtHelper;
 import io.jsonwebtoken.Claims;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -45,7 +41,17 @@ public class MyRealm extends AuthorizingRealm {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+		return null;
+	}
+
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+		return null;
+	}
+
+/*	@Autowired
 	private SysMenuDao sysMenuDao;
 	@Autowired
 	private RedisService redisService;
@@ -56,17 +62,17 @@ public class MyRealm extends AuthorizingRealm {
 	@Autowired
 	private UserOnlineStateService userOnlineStateService;
 
-    /**
+    *//**
      * JWTToken替换Shiro自带token，必须重写此方法，不然Shiro会报错
-     */
+     *//*
     @Override
     public boolean supports(AuthenticationToken token) {
         return token instanceof JWTToken;
     }
 
-    /**
+    *//**
      * 只有当需要检测用户权限的时候才会调用此方法，例如checkRole,checkPermission之类的
-     */
+     *//*
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
     	//从token解析出用户名
@@ -76,9 +82,9 @@ public class MyRealm extends AuthorizingRealm {
         List<String> permissionStrs = new ArrayList<>();
         User user = null;
         if(username.startsWith("试玩")) {
-        	/**
+        	*//**
         	 * Redis中不存在游客账户的SELF_USER，直接判断用户名即可
-        	 */
+        	 *//*
         	permissionStrs = (List<String>) redisTemplate.opsForHash().get(RedisPrefixConstants.AUTHCODE, RoleEnum.ROLE_FIVE.getCode());
         } else {
         	//获取Redis中的用户
@@ -91,9 +97,9 @@ public class MyRealm extends AuthorizingRealm {
         		}
         		redisService.set(RedisPrefixConstants.SELF_USER + username, user);
         	}
-        	/**
+        	*//**
         	 * 判断是不是会员的试玩账号
-        	 */
+        	 *//*
         	if(user.getAccountType()!=null && user.getAccountType()==0) {
         		permissionStrs = (List<String>) redisTemplate.opsForHash().get(RedisPrefixConstants.AUTHCODE, RoleEnum.ROLE_FIVE.getCode());
         	} else {
@@ -109,9 +115,9 @@ public class MyRealm extends AuthorizingRealm {
         return simpleAuthorizationInfo;
     }
 
-    /**
+    *//**
      * 默认使用此方法进行用户名正确与否验证，错误抛出异常即可。
-     */
+     *//*
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
     	String authToken = (String) auth.getCredentials();
@@ -135,6 +141,6 @@ public class MyRealm extends AuthorizingRealm {
         }
 
         return new SimpleAuthenticationInfo(token, token, "myRealm");
-    }
-	
+    }*/
+
 }
