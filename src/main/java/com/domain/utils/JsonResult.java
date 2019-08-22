@@ -1,4 +1,4 @@
-package com.domain;
+package com.domain.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;

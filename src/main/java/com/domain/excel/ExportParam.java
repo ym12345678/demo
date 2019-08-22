@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * create by mjl on2018/12/18
  */
 @Data
-public class ExportParam  extends ExportParams {
+public class ExportParam   {
     private String title;
     private short titleHeight = 10;
     private String secondTitle;
