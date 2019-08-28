@@ -1,0 +1,20 @@
+<FindBugsFilter>
+	<Match>
+	    <Or>
+	    	<!--
+		        1: high-priority warnings, 
+		        2: medium-priority warnings, 
+		        3: low-priority warnings
+	        --> 
+	        <Priority value="1" />
+	        <Priority value="2" />
+	        <!-- <Priority value="3" />  -->
+	    </Or>
+	    
+		<Bug 
+			code="SBSC,UrF,UuF,Dm,SQL,HRS,XSS,FI,MS,ST,BC,CI,DB,DLS,DMI,Eq,FE,IC,
+       	ICAST,MTIA,NP,PZLA,QF,RCN,RI,RV,SA,SF,ST,BC,DLS,DMI,EC,Eq,FE,GC,HE,IJU,IL,
+       	JCIP,MF,NP,Nm,QBA,RCN,RE,RV,RpC,SA,SF,SIO,SQL,Se,UCF,UMAC,UR,UwF,BC,CN,Co,
+       	DE,ES,Eq,FI,HE,IC,IMSE,ISC,J2EE,NP,Nm,OBL,ODR,OS,RC,RR,RV,SI,Se,SnVI" />
+	</Match>
+</FindBugsFilter>
