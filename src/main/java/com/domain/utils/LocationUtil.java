@@ -5,9 +5,12 @@ import com.alibaba.fastjson.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 
 /**
@@ -101,4 +104,25 @@ public class LocationUtil {
         //String location = getLocation("167.99.85.71");
         System.out.println(location);
     }*/
+
+
+
+    /**
+     * 异步获取ip归属地
+     *
+     * @param ip
+     * @auther: LJ
+     * @return:
+     */
+    @Async
+    public Future<String> asyncGetLocation(String ip) {
+//        聚合API
+        String location = LocationUtil.getIPByJuHe(ip);
+        //极速API
+//        String location = LocationUtil.getLocation(ip);
+        //IPIP.net
+//      String location = LocationUtil.getLocationByIpIp(ip);
+        return new AsyncResult<>(location);
+    }
+
 }
